@@ -16,10 +16,14 @@ import cosmin.dev.nokia5gmobileapp.navigation.Navigation
 import cosmin.dev.nokia5gmobileapp.ui.theme.Nokia5GMobileAppTheme
 
 class MainActivity : ComponentActivity() {
+    private lateinit var sharedPrefs: SharedPreferences
     @OptIn(ExperimentalMaterial3Api::class)
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        sharedPrefs = PreferenceManager.getDefaultSharedPreferences(applicationContext)
+        SharedPreferencesManager.initializeSharedPrefs(sharedPrefs)
+
         setContent {
             Nokia5GMobileAppTheme {
                 val navController = rememberNavController()
