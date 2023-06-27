@@ -11,6 +11,7 @@ import cosmin.dev.nokia5gmobileapp.ui.screens.main.MainScreen
 import cosmin.dev.nokia5gmobileapp.ui.screens.onboarding.CustomizeCarScreen
 import cosmin.dev.nokia5gmobileapp.ui.screens.onboarding.WelcomeScreen
 import cosmin.dev.nokia5gmobileapp.ui.screens.other.SplashScreen
+import cosmin.dev.nokia5gmobileapp.ui.screens.other.TutorialScreen
 
 @Composable
 fun Navigation(navController: NavHostController) {
@@ -30,6 +31,10 @@ fun Navigation(navController: NavHostController) {
 //        composable(Screen.CongratulationsScreen.route) {
 //            CongratulationsScreen(navController = navController)
 //        }
+
+        composable(Screen.TutorialScreen.route) {
+            TutorialScreen(navController = navController)
+        }
 
         composable(Screen.MainScreen.route) {
             MainScreen(navController = navController)

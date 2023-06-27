@@ -141,7 +141,7 @@ fun CustomizeCarScreen(navController: NavController) {
                     nameError = false
                     SharedPreferencesManager.setString("name", name)
                     SharedPreferencesManager.setString("car_color", selectedColor.toString())
-//                    navController.navigate()
+                    navController.navigate(Screen.TutorialScreen.route)
                 } else {
                     nameError = true
                 }
