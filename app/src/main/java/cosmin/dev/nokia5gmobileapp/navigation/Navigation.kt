@@ -7,6 +7,7 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navArgument
+import cosmin.dev.nokia5gmobileapp.ui.screens.main.MainScreen
 import cosmin.dev.nokia5gmobileapp.ui.screens.onboarding.WelcomeScreen
 import cosmin.dev.nokia5gmobileapp.ui.screens.other.SplashScreen
 
@@ -25,9 +26,9 @@ fun Navigation(navController: NavHostController) {
 //            CongratulationsScreen(navController = navController)
 //        }
 
-//        composable(Screen.MainScreen.route) {
-//            MainScreen(navController = navController)
-//        }
+        composable(Screen.MainScreen.route) {
+            MainScreen(navController = navController)
+        }
 
     }
 }

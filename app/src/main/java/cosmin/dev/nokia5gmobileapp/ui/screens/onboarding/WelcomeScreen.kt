@@ -29,6 +29,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import cosmin.dev.nokia5gmobileapp.R
+import cosmin.dev.nokia5gmobileapp.navigation.Screen
 import cosmin.dev.nokia5gmobileapp.ui.theme.DarkGreen
 import cosmin.dev.nokia5gmobileapp.ui.theme.LightGreen
 
