@@ -71,7 +71,7 @@ fun WelcomeScreen(navController: NavController) {
         }
 
         Button(
-            onClick = { },
+            onClick = { navController.navigate(Screen.CustomizeCarScreen.route) },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(vertical = 16.dp)
