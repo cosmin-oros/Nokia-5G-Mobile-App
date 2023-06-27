@@ -17,6 +17,10 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
@@ -26,11 +30,17 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.airbnb.lottie.compose.LottieAnimation
+import com.airbnb.lottie.compose.LottieCompositionSpec
+import com.airbnb.lottie.compose.LottieConstants
+import com.airbnb.lottie.compose.animateLottieCompositionAsState
+import com.airbnb.lottie.compose.rememberLottieComposition
 import cosmin.dev.nokia5gmobileapp.R
 import cosmin.dev.nokia5gmobileapp.data.SharedPreferencesManager
 import cosmin.dev.nokia5gmobileapp.navigation.Screen
 import cosmin.dev.nokia5gmobileapp.ui.theme.DarkGreen
 import cosmin.dev.nokia5gmobileapp.ui.theme.LightGreen
+import cosmin.dev.nokia5gmobileapp.utils.CarAnimation
 
 @Composable
 fun CongratulationsScreen(navController: NavController) {
@@ -60,7 +70,7 @@ fun CongratulationsScreen(navController: NavController) {
 
             Text(
                 text = "Congratulations!",
-                style = MaterialTheme.typography.titleMedium,
+                style = MaterialTheme.typography.titleLarge,
                 modifier = Modifier.padding(bottom = 16.dp)
             )
 
@@ -71,6 +81,10 @@ fun CongratulationsScreen(navController: NavController) {
                 style = MaterialTheme.typography.titleMedium,
                 modifier = Modifier.padding(bottom = 16.dp)
             )
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            CarAnimation(color = SharedPreferencesManager.getString("car_color", "black"))
 
         }
 

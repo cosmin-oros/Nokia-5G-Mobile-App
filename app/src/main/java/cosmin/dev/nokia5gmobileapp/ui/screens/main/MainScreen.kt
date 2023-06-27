@@ -28,6 +28,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import cosmin.dev.nokia5gmobileapp.R
+import cosmin.dev.nokia5gmobileapp.data.SharedPreferencesManager
+import cosmin.dev.nokia5gmobileapp.navigation.Screen
 import cosmin.dev.nokia5gmobileapp.ui.theme.DarkGreen
 import cosmin.dev.nokia5gmobileapp.ui.theme.LightGreen
 
@@ -88,7 +90,11 @@ fun MainScreen(navController: NavController) {
             Spacer(modifier = Modifier.height(16.dp))
 
             Button(
-                onClick = { },
+                onClick = {
+                    // ! remove this
+                    SharedPreferencesManager.setString("logged_in", "no")
+                    navController.navigate(Screen.WelcomeScreen.route)
+                          },
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(vertical = 16.dp)
