@@ -141,11 +141,12 @@ fun CustomizeCarScreen(navController: NavController) {
                     nameError = false
                     SharedPreferencesManager.setString("name", name)
 
-                    // find a more efficient way to do this
-                    if (selectedColor.value == Color.Black) {
-                        SharedPreferencesManager.setString("car_color", "black")
-                    } else if (selectedColor.value == Color.White) {
-                        SharedPreferencesManager.setString("car_color", "white")
+                    when (selectedColor.value) {
+                        Color.Black -> SharedPreferencesManager.setString("car_color", "black")
+                        Color.Blue -> SharedPreferencesManager.setString("car_color", "blue")
+                        Color.Cyan -> SharedPreferencesManager.setString("car_color", "cyan")
+                        Color.Red -> SharedPreferencesManager.setString("car_color", "red")
+                        else -> SharedPreferencesManager.setString("car_color", "default")
                     }
 
                     navController.navigate(Screen.TutorialScreen.route)

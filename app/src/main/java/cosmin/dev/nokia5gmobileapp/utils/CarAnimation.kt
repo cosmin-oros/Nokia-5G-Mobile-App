@@ -13,21 +13,39 @@ import cosmin.dev.nokia5gmobileapp.R
 
 @Composable
 fun CarAnimation(color: String) {
-    val compositionRed by rememberLottieComposition(LottieCompositionSpec.RawRes(R.raw.car1))
-    val composition2 by rememberLottieComposition(LottieCompositionSpec.RawRes(R.raw.car2))
-    val composition3 by rememberLottieComposition(LottieCompositionSpec.RawRes(R.raw.car3))
-    val composition4 by rememberLottieComposition(LottieCompositionSpec.RawRes(R.raw.car4))
-    val composition5 by rememberLottieComposition(LottieCompositionSpec.RawRes(R.raw.car5))
-    val composition6 by rememberLottieComposition(LottieCompositionSpec.RawRes(R.raw.car6))
-    val composition7 by rememberLottieComposition(LottieCompositionSpec.RawRes(R.raw.car7))
-    val composition8 by rememberLottieComposition(LottieCompositionSpec.RawRes(R.raw.car8))
-    val composition9 by rememberLottieComposition(LottieCompositionSpec.RawRes(R.raw.car9))
+    val compositionRed by rememberLottieComposition(LottieCompositionSpec.RawRes(R.raw.car_red))
+    val compositionCyan by rememberLottieComposition(LottieCompositionSpec.RawRes(R.raw.car_blue1))
+    val compositionBlue by rememberLottieComposition(LottieCompositionSpec.RawRes(R.raw.car_blue2))
+    val compositionBlack by rememberLottieComposition(LottieCompositionSpec.RawRes(R.raw.car_black))
+    val composition by rememberLottieComposition(LottieCompositionSpec.RawRes(R.raw.car))
 
-//    if sau when pt coloru primit, momentan cred ca toate is la fel animatiile trb sa le descarc iar
+    when (color) {
+        "black" -> LottieAnimation(
+            modifier = Modifier.size(250.dp),
+            composition = compositionBlack,
+            iterations = LottieConstants.IterateForever
+        )
+        "blue" -> LottieAnimation(
+            modifier = Modifier.size(250.dp),
+            composition = compositionBlue,
+            iterations = LottieConstants.IterateForever
+        )
+        "cyan" -> LottieAnimation(
+            modifier = Modifier.size(250.dp),
+            composition = compositionCyan,
+            iterations = LottieConstants.IterateForever
+        )
+        "red" -> LottieAnimation(
+            modifier = Modifier.size(250.dp),
+            composition = compositionRed,
+            iterations = LottieConstants.IterateForever
+        )
+        else -> LottieAnimation(
+            modifier = Modifier.size(250.dp),
+            composition = composition,
+            iterations = LottieConstants.IterateForever
+        )
+    }
 
-    LottieAnimation(
-        modifier = Modifier.size(250.dp),
-        composition = composition5,
-        iterations = LottieConstants.IterateForever
-    )
+
 }
