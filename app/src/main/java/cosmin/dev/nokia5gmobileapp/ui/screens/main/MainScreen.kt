@@ -58,7 +58,7 @@ fun MainScreen(navController: NavController) {
             Spacer(modifier = Modifier.height(16.dp))
 
             Button(
-                onClick = { },
+                onClick = { navController.navigate(Screen.SinglePlayerScreen.route) },
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(vertical = 16.dp)
