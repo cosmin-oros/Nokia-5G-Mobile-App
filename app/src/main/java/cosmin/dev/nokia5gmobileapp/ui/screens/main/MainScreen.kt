@@ -49,6 +49,8 @@ fun MainScreen(navController: NavController) {
         ) {
             Spacer(modifier = Modifier.height(32.dp))
 
+            // ! add profile icon and settings
+
             Image(
                 painter = painterResource(id = R.drawable.ic_launcher_foreground),
                 contentDescription = "Logo",

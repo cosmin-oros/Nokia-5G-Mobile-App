@@ -32,6 +32,7 @@ fun SinglePlayerScreen(navController: NavController) {
     val carImage = painterResource(R.drawable.ic_launcher_foreground) // Replace with your car image resource
     val canvasSize = 300.dp
 
+    // problem with local context
     val connectivityManager = LocalContext.current.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
     LaunchedEffect(Unit) {
