@@ -3,13 +3,16 @@ package cosmin.dev.nokia5gmobileapp.ui.screens.main
 import android.annotation.SuppressLint
 import android.content.Context
 import android.net.ConnectivityManager
+import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.*
@@ -38,8 +41,11 @@ fun SinglePlayerScreen(navController: NavController) {
     var carWithInternetPosition by remember { mutableStateOf(0f) }
     var carWithSetSpeedPosition by remember { mutableStateOf(0f) }
 
-    val carImage = painterResource(R.drawable.ic_launcher_foreground) // Replace with your car image resource
-    val canvasSize = 300.dp
+    val maxDistance = 300.dp // Maximum distance to the right
+
+    // Calculate the dynamic distance based on the carWithSetSpeedPosition
+    val dynamicDistance = (carWithSetSpeedPosition * 10).dp.coerceAtMost(maxDistance)
+    val dynamicDistanceYourCar = (carWithInternetPosition * 10).dp.coerceAtMost(maxDistance)
 
     val connectivityManager = LocalContext.current.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
@@ -60,8 +66,8 @@ fun SinglePlayerScreen(navController: NavController) {
 
     LaunchedEffect(Unit) {
         while (true) {
-            carWithSetSpeedPosition += 5f // Adjust the set speed as needed
-            delay(16) // Delay to control the speed of the game loop
+            carWithSetSpeedPosition += 3f // Adjust the set speed as needed
+            delay(1000) // Delay to control the speed of the game loop
         }
     }
 
@@ -73,11 +79,28 @@ fun SinglePlayerScreen(navController: NavController) {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.End
     ) {
-        CarAnimation(color = SharedPreferencesManager.getString("car_color", "black"))
+        // !!! Make them move slowly but with the speeds set above until one of them reaches a certain point (left side of the screen
+        // make the cars smaller in size
+
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(end = dynamicDistanceYourCar),
+            horizontalArrangement = Arrangement.End
+        ) {
+            CarAnimation(color = SharedPreferencesManager.getString("car_color", "black"))
+        }
 
         Spacer(modifier = Modifier.height(32.dp))
 
-        CarAnimation(color = "black")
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(end = dynamicDistance),
+            horizontalArrangement = Arrangement.End
+        ) {
+            CarAnimation(color = "black")
+        }
     }
 
 }
