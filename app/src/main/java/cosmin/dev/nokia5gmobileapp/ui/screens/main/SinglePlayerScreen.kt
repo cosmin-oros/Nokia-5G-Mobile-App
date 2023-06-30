@@ -6,8 +6,14 @@ import android.net.ConnectivityManager
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
@@ -19,6 +25,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import cosmin.dev.nokia5gmobileapp.R
+import cosmin.dev.nokia5gmobileapp.data.SharedPreferencesManager
+import cosmin.dev.nokia5gmobileapp.utils.CarAnimation
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
@@ -57,6 +65,19 @@ fun SinglePlayerScreen(navController: NavController) {
         }
     }
 
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(horizontal = 16.dp)
+            .padding(bottom = 32.dp),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.End
+    ) {
+        CarAnimation(color = SharedPreferencesManager.getString("car_color", "black"))
 
+        Spacer(modifier = Modifier.height(32.dp))
+
+        CarAnimation(color = "black")
+    }
 
 }
