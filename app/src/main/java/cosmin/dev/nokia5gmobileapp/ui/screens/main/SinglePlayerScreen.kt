@@ -13,6 +13,7 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.asImageBitmap
+import androidx.compose.ui.graphics.painter.BitmapPainter
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
@@ -32,7 +33,6 @@ fun SinglePlayerScreen(navController: NavController) {
     val carImage = painterResource(R.drawable.ic_launcher_foreground) // Replace with your car image resource
     val canvasSize = 300.dp
 
-    // problem with local context
     val connectivityManager = LocalContext.current.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
     LaunchedEffect(Unit) {
@@ -57,18 +57,6 @@ fun SinglePlayerScreen(navController: NavController) {
         }
     }
 
-    Canvas(modifier = Modifier.fillMaxSize()) {
-        drawRect(Color.White, size = size)
 
-        val carImageBitmap = carImage as ImageBitmap
 
-        val carWidth = carImageBitmap.width.toFloat()
-        val carHeight = carImageBitmap.height.toFloat()
-
-        val carWithInternetX = (size.width - carWidth) * carWithInternetPosition / 100f
-        val carWithSetSpeedX = (size.width - carWidth) * carWithSetSpeedPosition / 100f
-
-        drawImage(carImageBitmap, Offset(carWithInternetX, 100f))
-        drawImage(carImageBitmap, Offset(carWithSetSpeedX, 200f))
-    }
 }
