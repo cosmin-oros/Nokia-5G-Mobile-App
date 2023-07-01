@@ -53,12 +53,14 @@ fun SinglePlayerScreen(navController: NavController) {
         while (true) {
             val networkCapabilities = connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)
 
+            // down - 94248 up - 9644
             val downloadSpeed = networkCapabilities?.linkDownstreamBandwidthKbps
             val uploadSpeed = networkCapabilities?.linkUpstreamBandwidthKbps
 
-            val internetSpeed = downloadSpeed?.toFloat() ?: 0f // Change to use both download and upload speeds
+            val internetSpeed = (uploadSpeed?.toFloat()?.let { downloadSpeed?.toFloat()?.plus(it) }) ?: 0f // upload speed + download speed
 
-            carWithInternetPosition = internetSpeed / 10f
+            // still way too fast and need to fix the fact that the car gets smaller
+            carWithInternetPosition += (internetSpeed / 10000f)
 
             delay(1000) // Delay to simulate the interval between measurements
         }
@@ -66,6 +68,13 @@ fun SinglePlayerScreen(navController: NavController) {
 
     LaunchedEffect(Unit) {
         while (true) {
+            // change these and make an option to select 4g/5g option when entering the screen
+            val averageDownloadSpeed4g = 0f
+            val averageUploadSpeed4g = 0f
+            val averageDownloadSpeed5g = 0f
+            val averageUploadSpeed5g = 0f
+
+            // change 3f to averageDown + averageUp / 10000f
             carWithSetSpeedPosition += 3f // Adjust the set speed as needed
             delay(1000) // Delay to control the speed of the game loop
         }
@@ -81,6 +90,7 @@ fun SinglePlayerScreen(navController: NavController) {
     ) {
         // !!! Make them move slowly but with the speeds set above until one of them reaches a certain point (left side of the screen
         // make the cars smaller in size
+        // when they reach a certain point display a congratulations message
 
         Row(
             modifier = Modifier
