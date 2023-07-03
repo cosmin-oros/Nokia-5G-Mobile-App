@@ -66,7 +66,7 @@ fun MainScreen(navController: NavController) {
                     modifier = Modifier
                         .size(48.dp)
                         .clickable {
-                            // TODO: Handle profile icon click
+                            navController.navigate(Screen.ProfileScreen.route)
                         }
                         .padding(8.dp)
                 )
@@ -77,7 +77,7 @@ fun MainScreen(navController: NavController) {
                     modifier = Modifier
                         .size(48.dp)
                         .clickable {
-                            // TODO: Handle settings icon click
+                            navController.navigate(Screen.SettingsScreen.route)
                         }
                         .padding(8.dp)
                 )
@@ -128,11 +128,7 @@ fun MainScreen(navController: NavController) {
             Spacer(modifier = Modifier.height(16.dp))
 
             Button(
-                onClick = {
-                    // ! remove this
-                    SharedPreferencesManager.setString("logged_in", "no")
-                    navController.navigate(Screen.WelcomeScreen.route)
-                          },
+                onClick = { },
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(vertical = 16.dp)
