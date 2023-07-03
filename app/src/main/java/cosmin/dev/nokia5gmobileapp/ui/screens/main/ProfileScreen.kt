@@ -6,5 +6,5 @@ import androidx.navigation.NavController
 // retrieve info from shared pref
 @Composable
 fun ProfileScreen(navController: NavController) {
-
+    // display car name, color, how many times you won etc
 }
