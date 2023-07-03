@@ -30,6 +30,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import androidx.navigation.compose.DialogHost
 import cosmin.dev.nokia5gmobileapp.R
 import cosmin.dev.nokia5gmobileapp.data.SharedPreferencesManager
 import cosmin.dev.nokia5gmobileapp.navigation.Screen
@@ -116,25 +117,49 @@ fun SinglePlayerScreen(navController: NavController) {
             CarAnimation(color = "black", size = 100.dp)
         }
 
-        if (carWithInternetPosition >= maxDistance || carWithSetSpeedPosition >= maxDistance) {
+        if (carWithInternetPosition >= 20f || carWithSetSpeedPosition >= 20f) {
             val dialogShown = remember { mutableStateOf(false) }
             if (!dialogShown.value) {
-                AlertDialog(
-                    onDismissRequest = { dialogShown.value = false },
-                    title = { Text("Congratulations!") },
-                    text = { Text("You won!") },
-                    confirmButton = {
-                        Button(
-                            onClick = {
-                                dialogShown.value = false
-                                navController.navigate(Screen.MainScreen.route)
+                LaunchedEffect(Unit) {
+                    delay(1000) // Delay to ensure the dialog is shown after the composition is committed
+                    dialogShown.value = true
+                }
+            }
+
+            if (dialogShown.value) {
+                if (carWithInternetPosition > carWithSetSpeedPosition) {
+                    AlertDialog(
+                        onDismissRequest = { dialogShown.value = false },
+                        title = { Text("Congratulations!") },
+                        text = { Text("You won!") },
+                        confirmButton = {
+                            Button(
+                                onClick = {
+                                    dialogShown.value = false
+                                    navController.navigate(Screen.MainScreen.route)
+                                }
+                            ) {
+                                Text("OK")
                             }
-                        ) {
-                            Text("OK")
                         }
-                    }
-                )
-                dialogShown.value = true
+                    )
+                } else {
+                    AlertDialog(
+                        onDismissRequest = { dialogShown.value = false },
+                        title = { Text("Better luck next time!") },
+                        text = { Text("You lost!") },
+                        confirmButton = {
+                            Button(
+                                onClick = {
+                                    dialogShown.value = false
+                                    navController.navigate(Screen.MainScreen.route)
+                                }
+                            ) {
+                                Text("OK")
+                            }
+                        }
+                    )
+                }
             }
         }
     }
