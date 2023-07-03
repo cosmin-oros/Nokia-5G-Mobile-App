@@ -84,7 +84,7 @@ fun CongratulationsScreen(navController: NavController) {
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            CarAnimation(color = SharedPreferencesManager.getString("car_color", "black"))
+            CarAnimation(color = SharedPreferencesManager.getString("car_color", "black"), size = 250.dp)
 
         }
 

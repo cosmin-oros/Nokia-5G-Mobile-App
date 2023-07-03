@@ -60,7 +60,7 @@ fun SinglePlayerScreen(navController: NavController) {
             val internetSpeed = (uploadSpeed?.toFloat()?.let { downloadSpeed?.toFloat()?.plus(it) }) ?: 0f // upload speed + download speed
 
             // still way too fast and need to fix the fact that the car gets smaller
-            carWithInternetPosition += (internetSpeed / 10000f)
+            carWithInternetPosition += (internetSpeed / 100000f)
 
             delay(1000) // Delay to simulate the interval between measurements
         }
@@ -75,7 +75,7 @@ fun SinglePlayerScreen(navController: NavController) {
             val averageUploadSpeed5g = 0f
 
             // change 3f to averageDown + averageUp / 10000f
-            carWithSetSpeedPosition += 3f // Adjust the set speed as needed
+            carWithSetSpeedPosition += 0.3f // Adjust the set speed as needed
             delay(1000) // Delay to control the speed of the game loop
         }
     }
@@ -98,7 +98,7 @@ fun SinglePlayerScreen(navController: NavController) {
                 .padding(end = dynamicDistanceYourCar),
             horizontalArrangement = Arrangement.End
         ) {
-            CarAnimation(color = SharedPreferencesManager.getString("car_color", "black"))
+            CarAnimation(color = SharedPreferencesManager.getString("car_color", "black"), size = 200.dp)
         }
 
         Spacer(modifier = Modifier.height(32.dp))
@@ -109,7 +109,7 @@ fun SinglePlayerScreen(navController: NavController) {
                 .padding(end = dynamicDistance),
             horizontalArrangement = Arrangement.End
         ) {
-            CarAnimation(color = "black")
+            CarAnimation(color = "black", size = 200.dp)
         }
     }
 
