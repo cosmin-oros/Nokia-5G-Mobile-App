@@ -2,18 +2,24 @@ package cosmin.dev.nokia5gmobileapp.ui.screens.main
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Person
+import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -47,6 +53,36 @@ fun MainScreen(navController: NavController) {
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            Spacer(modifier = Modifier.height(8.dp))
+
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Icon(
+                    imageVector = Icons.Outlined.Person,
+                    contentDescription = "Profile Icon",
+                    modifier = Modifier
+                        .size(48.dp)
+                        .clickable {
+                            // TODO: Handle profile icon click
+                        }
+                        .padding(8.dp)
+                )
+
+                Icon(
+                    imageVector = Icons.Outlined.Settings,
+                    contentDescription = "Settings Icon",
+                    modifier = Modifier
+                        .size(48.dp)
+                        .clickable {
+                            // TODO: Handle settings icon click
+                        }
+                        .padding(8.dp)
+                )
+            }
+
             Spacer(modifier = Modifier.height(32.dp))
 
             // ! add profile icon and settings
@@ -111,8 +147,8 @@ fun MainScreen(navController: NavController) {
                         .background(
                             brush = Brush.verticalGradient(
                                 colors = listOf(
-                                    DarkGreen,
-                                    LightGreen
+                                    Color.DarkGray,
+                                    Color.LightGray
                                 )
                             )
                         )
@@ -143,8 +179,8 @@ fun MainScreen(navController: NavController) {
                         .background(
                             brush = Brush.verticalGradient(
                                 colors = listOf(
-                                    DarkGreen,
-                                    LightGreen
+                                    Color.DarkGray,
+                                    Color.LightGray
                                 )
                             )
                         )

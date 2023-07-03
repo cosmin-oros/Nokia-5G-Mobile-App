@@ -8,6 +8,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navArgument
 import cosmin.dev.nokia5gmobileapp.ui.screens.main.MainScreen
+import cosmin.dev.nokia5gmobileapp.ui.screens.main.ProfileScreen
+import cosmin.dev.nokia5gmobileapp.ui.screens.main.SettingsScreen
 import cosmin.dev.nokia5gmobileapp.ui.screens.main.SinglePlayerScreen
 import cosmin.dev.nokia5gmobileapp.ui.screens.onboarding.CongratulationsScreen
 import cosmin.dev.nokia5gmobileapp.ui.screens.onboarding.CustomizeCarScreen
@@ -44,6 +46,14 @@ fun Navigation(navController: NavHostController) {
 
         composable(Screen.SinglePlayerScreen.route) {
             SinglePlayerScreen(navController = navController)
+        }
+
+        composable(Screen.SettingsScreen.route) {
+            SettingsScreen(navController = navController)
+        }
+
+        composable(Screen.ProfileScreen.route) {
+            ProfileScreen(navController = navController)
         }
 
     }

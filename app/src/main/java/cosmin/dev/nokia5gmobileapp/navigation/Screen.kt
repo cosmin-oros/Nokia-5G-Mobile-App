@@ -10,6 +10,8 @@ sealed class Screen(val route: String){
     object CongratulationsScreen: Screen("congratulations_screen")
     object MainScreen: Screen("main_screen")
     object SinglePlayerScreen: Screen("single_player_screen")
+    object ProfileScreen: Screen("profile_screen")
+    object SettingsScreen: Screen("settings_screen")
 
     fun withArgs(vararg args: String): String{
         return buildString {
