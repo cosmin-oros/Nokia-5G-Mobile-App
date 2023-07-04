@@ -1,10 +1,12 @@
 package cosmin.dev.nokia5gmobileapp.ui.screens.main
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -33,7 +35,10 @@ import cosmin.dev.nokia5gmobileapp.navigation.Screen
 @Composable
 fun SettingsScreen(navController: NavController) {
     Column(
-        modifier = Modifier.padding(16.dp),
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp),
+        verticalArrangement = Arrangement.SpaceBetween
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically
@@ -58,6 +63,8 @@ fun SettingsScreen(navController: NavController) {
                 )
             }
         }
+
+        Spacer(modifier = Modifier.weight(1f))
 
         Button(
             onClick = {
