@@ -96,6 +96,7 @@ fun SinglePlayerScreen(navController: NavController) {
         // !!! Make them move slowly but with the speeds set above until one of them reaches a certain point (left side of the screen
         // make the cars smaller in size
         // when they reach a certain point display a congratulations message
+        // change speed of opponent based on the shared preferences 4g/5g
 
         Row(
             modifier = Modifier

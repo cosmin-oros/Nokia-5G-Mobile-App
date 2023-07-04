@@ -62,6 +62,8 @@ fun ProfileScreen(navController: NavController) {
             }
         }
 
+        // make option to change the car color
+
         Column(
             modifier = Modifier.fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally,
