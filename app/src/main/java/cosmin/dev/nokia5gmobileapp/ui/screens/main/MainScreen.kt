@@ -127,6 +127,8 @@ fun MainScreen(navController: NavController) {
 
             Spacer(modifier = Modifier.height(16.dp))
 
+            // ! daca fac asta poate folosesc firebase si un cod de creare lobby
+
             Button(
                 onClick = { },
                 modifier = Modifier

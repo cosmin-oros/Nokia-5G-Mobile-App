@@ -103,7 +103,7 @@ fun SinglePlayerScreen(navController: NavController) {
                 .padding(end = dynamicDistanceYourCar),
             horizontalArrangement = Arrangement.End
         ) {
-            CarAnimation(color = SharedPreferencesManager.getString("car_color", "black"), size = 100.dp)
+            CarAnimation(color = SharedPreferencesManager.getString("car_color", "black"), size = 100.dp, isOpponent = false)
         }
 
         Spacer(modifier = Modifier.height(32.dp))
@@ -114,7 +114,7 @@ fun SinglePlayerScreen(navController: NavController) {
                 .padding(end = dynamicDistance),
             horizontalArrangement = Arrangement.End
         ) {
-            CarAnimation(color = "black", size = 100.dp)
+            CarAnimation(color = "black", size = 100.dp, isOpponent = true)
         }
 
         if (carWithInternetPosition >= 20f || carWithSetSpeedPosition >= 20f) {
