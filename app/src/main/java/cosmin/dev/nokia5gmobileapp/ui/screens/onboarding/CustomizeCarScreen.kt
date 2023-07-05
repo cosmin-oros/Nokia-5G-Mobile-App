@@ -51,8 +51,9 @@ import cosmin.dev.nokia5gmobileapp.utils.ColorOption
 fun CustomizeCarScreen(navController: NavController) {
     var name by remember { mutableStateOf("") }
     var nameError by remember { mutableStateOf(false) }
-    val colors = remember { mutableStateListOf(Color.Black, Color.White, Color.DarkGray, Color.Red, Color.Blue,
-        Color.Green, Color.Yellow, Color.Cyan, Color.Magenta, DarkGreen) }
+    val colors = remember { mutableStateListOf(Color.Black, Color.Blue,
+        Color.Cyan, Color.Red, Color.Yellow, Color.LightGray, Color.LightGray,
+        Color.LightGray, Color.LightGray, Color.LightGray, Color.LightGray) }
     val selectedColor = remember { mutableStateOf(colors[0]) }
     val scrollState = rememberScrollState()
 
