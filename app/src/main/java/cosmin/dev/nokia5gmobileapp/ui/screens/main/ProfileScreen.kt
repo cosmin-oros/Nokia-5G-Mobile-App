@@ -35,6 +35,7 @@ import cosmin.dev.nokia5gmobileapp.utils.CarAnimation
 @Composable
 fun ProfileScreen(navController: NavController) {
     // display car name, color, how many times you won etc
+    // ! Make achievements for reaching a certain speed / winning a certain amount of times etc
     Column(
         modifier = Modifier.padding(16.dp),
     ) {

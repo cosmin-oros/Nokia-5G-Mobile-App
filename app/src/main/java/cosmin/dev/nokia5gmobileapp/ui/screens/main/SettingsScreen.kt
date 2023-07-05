@@ -42,6 +42,8 @@ import cosmin.dev.nokia5gmobileapp.navigation.Screen
 fun SettingsScreen(navController: NavController) {
     var selectedButton by remember { mutableStateOf(SharedPreferencesManager.getString("opponent_speed", "4g")) }
 
+    // make something to access the tutorial again
+
     Column(
         modifier = Modifier
             .fillMaxSize()

@@ -33,6 +33,8 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -46,6 +48,8 @@ import cosmin.dev.nokia5gmobileapp.utils.ColorOption
 
 @Composable
 fun TutorialScreen(navController: NavController) {
+    var counter by remember { mutableStateOf(0) }
+    var textValue by remember { mutableStateOf("You've successfully customized your car!") }
 
     Column(
         modifier = Modifier
@@ -58,9 +62,26 @@ fun TutorialScreen(navController: NavController) {
 
         Column(
             verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
+            horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Spacer(modifier = Modifier.height(32.dp))
+
+            Image(
+                painter = painterResource(id = R.drawable.ic_launcher_foreground),
+                contentDescription = "Logo",
+                modifier = Modifier.size(200.dp)
+            )
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            Box(modifier = Modifier.padding(bottom = 32.dp)) {
+                Text(
+                    text = textValue,
+                    style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
+                    textAlign = TextAlign.Center, // Center align the text
+                    modifier = Modifier.fillMaxWidth()
+                )
+            }
 
 
         }
@@ -68,10 +89,26 @@ fun TutorialScreen(navController: NavController) {
 
         Button(
             onClick = {
-                if (SharedPreferencesManager.getString("logged_in", "no") == "yes") {
-                    navController.navigate(Screen.MainScreen.route)
-                } else {
-                    navController.navigate(Screen.CongratulationsScreen.route)
+                when (counter) {
+                    0 -> {
+                        textValue = "You're now ready to race against an opponent!"
+                        counter++
+                    }
+                    1 -> {
+                        textValue = "Your speed will be determined by taking into account both your download and upload speeds!"
+                        counter++
+                    }
+                    2 -> {
+                        textValue = "You can choose the opponent's speed in the settings tab!"
+                        counter++
+                    }
+                    else -> {
+                        if (SharedPreferencesManager.getString("logged_in", "no") == "yes") {
+                            navController.navigate(Screen.MainScreen.route)
+                        } else {
+                            navController.navigate(Screen.CongratulationsScreen.route)
+                        }
+                    }
                 }
             },
             modifier = Modifier

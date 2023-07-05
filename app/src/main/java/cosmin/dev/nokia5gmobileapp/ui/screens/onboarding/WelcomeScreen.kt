@@ -25,6 +25,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -35,6 +36,7 @@ import cosmin.dev.nokia5gmobileapp.ui.theme.LightGreen
 
 @Composable
 fun WelcomeScreen(navController: NavController) {
+    // ! Sa fac optiune de romana/ engleza cu steaguri si aici si in settings
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -58,16 +60,20 @@ fun WelcomeScreen(navController: NavController) {
             Spacer(modifier = Modifier.height(16.dp))
 
             Text(
-                text = "Nokia 5G/4G",
+                text = "Nokia 5G/4G Race Game",
                 style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
                 modifier = Modifier.padding(bottom = 32.dp)
             )
 
-            Text(
-                text = "Race against opponents using your internet speed and win rewards!",
-                style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.SemiBold),
-                modifier = Modifier.padding(bottom = 32.dp)
-            )
+            Box(modifier = Modifier.padding(bottom = 32.dp)) {
+                Text(
+                    text = "Race against opponents using your internet speed and win rewards!",
+                    style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.SemiBold),
+                    textAlign = TextAlign.Center, // Center align the text
+                    modifier = Modifier.fillMaxWidth()
+                )
+            }
+
         }
 
         Button(
