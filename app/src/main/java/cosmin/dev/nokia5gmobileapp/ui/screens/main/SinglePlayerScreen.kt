@@ -64,7 +64,6 @@ fun SinglePlayerScreen(navController: NavController) {
 
             val internetSpeed = (uploadSpeed?.toFloat()?.let { downloadSpeed?.toFloat()?.plus(it) }) ?: 0f // upload speed + download speed
 
-            // still way too fast and need to fix the fact that the car gets smaller
             carWithInternetPosition += (internetSpeed / 10000000f)
 
             delay(10) // Delay to simulate the interval between measurements
@@ -73,14 +72,18 @@ fun SinglePlayerScreen(navController: NavController) {
 
     LaunchedEffect(Unit) {
         while (true) {
-            // change these and make an option to select 4g/5g option when entering the screen
-            val averageDownloadSpeed4g = 0f
-            val averageUploadSpeed4g = 0f
-            val averageDownloadSpeed5g = 0f
-            val averageUploadSpeed5g = 0f
+            // change these with better estimates
+            val averageDownloadSpeed4g = 20000f
+            val averageUploadSpeed4g = 4000f
+            val averageDownloadSpeed5g = 100000f
+            val averageUploadSpeed5g = 10000f
 
             // change 0.3f to averageDown + averageUp / 10000000f !!!
-            carWithSetSpeedPosition += 0.003f // Adjust the set speed as needed
+            carWithSetSpeedPosition += if (SharedPreferencesManager.getString("opponent_speed", "4g") == "4g") {
+                ((averageDownloadSpeed4g + averageUploadSpeed4g) / 10000000f)
+            } else {
+                ((averageDownloadSpeed5g + averageUploadSpeed5g) / 10000000f)
+            }
             delay(10) // Delay to control the speed of the game loop
         }
     }
@@ -164,7 +167,5 @@ fun SinglePlayerScreen(navController: NavController) {
             }
         }
     }
-
-
 
 }
