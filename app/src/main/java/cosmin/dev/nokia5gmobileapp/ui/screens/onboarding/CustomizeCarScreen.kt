@@ -51,6 +51,7 @@ import cosmin.dev.nokia5gmobileapp.utils.ColorOption
 fun CustomizeCarScreen(navController: NavController) {
     var name by remember { mutableStateOf("") }
     var nameError by remember { mutableStateOf(false) }
+    var nameTooShortError by remember { mutableStateOf(false) }
     val colors = remember { mutableStateListOf(Color.Black, Color.Blue,
         Color.Cyan, Color.Red, Color.Yellow, Color.LightGray, Color.LightGray,
         Color.LightGray, Color.LightGray, Color.LightGray, Color.LightGray) }
@@ -117,6 +118,15 @@ fun CustomizeCarScreen(navController: NavController) {
                 )
             }
 
+            if (nameTooShortError) {
+                Text(
+                    text = "Please enter a longer name",
+                    color = Color.Red,
+                    style = MaterialTheme.typography.labelSmall,
+                    modifier = Modifier.padding(top = 4.dp)
+                )
+            }
+
             Spacer(modifier = Modifier.height(32.dp))
 
             Text(
@@ -139,18 +149,23 @@ fun CustomizeCarScreen(navController: NavController) {
         Button(
             onClick = {
                 if (isNameValid(name)) {
-                    nameError = false
-                    SharedPreferencesManager.setString("name", name)
+                    if (name.length in 1..4) {
+                        nameTooShortError = true
+                    } else {
+                        nameError = false
+                        nameTooShortError = false
+                        SharedPreferencesManager.setString("name", name)
 
-                    when (selectedColor.value) {
-                        Color.Black -> SharedPreferencesManager.setString("car_color", "black")
-                        Color.Blue -> SharedPreferencesManager.setString("car_color", "blue")
-                        Color.Cyan -> SharedPreferencesManager.setString("car_color", "cyan")
-                        Color.Red -> SharedPreferencesManager.setString("car_color", "red")
-                        else -> SharedPreferencesManager.setString("car_color", "default")
+                        when (selectedColor.value) {
+                            Color.Black -> SharedPreferencesManager.setString("car_color", "black")
+                            Color.Blue -> SharedPreferencesManager.setString("car_color", "blue")
+                            Color.Cyan -> SharedPreferencesManager.setString("car_color", "cyan")
+                            Color.Red -> SharedPreferencesManager.setString("car_color", "red")
+                            else -> SharedPreferencesManager.setString("car_color", "default")
+                        }
+
+                        navController.navigate(Screen.TutorialScreen.route)
                     }
-
-                    navController.navigate(Screen.TutorialScreen.route)
                 } else {
                     nameError = true
                 }
