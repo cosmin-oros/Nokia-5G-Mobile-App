@@ -50,6 +50,7 @@ import cosmin.dev.nokia5gmobileapp.utils.ColorOption
 fun TutorialScreen(navController: NavController) {
     var counter by remember { mutableStateOf(0) }
     var textValue by remember { mutableStateOf("You've successfully customized your car!") }
+    var language by remember { mutableStateOf(SharedPreferencesManager.getString("language", "english")) }
 
     Column(
         modifier = Modifier

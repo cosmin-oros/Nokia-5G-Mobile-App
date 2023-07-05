@@ -57,6 +57,7 @@ fun CustomizeCarScreen(navController: NavController) {
         Color.LightGray, Color.LightGray, Color.LightGray, Color.LightGray) }
     val selectedColor = remember { mutableStateOf(colors[0]) }
     val scrollState = rememberScrollState()
+    var language by remember { mutableStateOf(SharedPreferencesManager.getString("language", "english")) }
 
     Column(
         modifier = Modifier

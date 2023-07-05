@@ -45,6 +45,7 @@ import kotlinx.coroutines.launch
 fun SinglePlayerScreen(navController: NavController) {
     var carWithInternetPosition by remember { mutableStateOf(0f) }
     var carWithSetSpeedPosition by remember { mutableStateOf(0f) }
+    var language by remember { mutableStateOf(SharedPreferencesManager.getString("language", "english")) }
 
     val maxDistance = 220f // Maximum distance to the right
 

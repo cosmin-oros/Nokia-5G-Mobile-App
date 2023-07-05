@@ -44,6 +44,7 @@ import cosmin.dev.nokia5gmobileapp.utils.CarAnimation
 
 @Composable
 fun CongratulationsScreen(navController: NavController) {
+    var language by remember { mutableStateOf(SharedPreferencesManager.getString("language", "english")) }
 
     Column(
         modifier = Modifier

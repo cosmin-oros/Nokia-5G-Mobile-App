@@ -1,5 +1,6 @@
 package cosmin.dev.nokia5gmobileapp.ui.screens.main
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -10,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowBack
 import androidx.compose.material3.Button
@@ -19,14 +21,20 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import cosmin.dev.nokia5gmobileapp.R
 import cosmin.dev.nokia5gmobileapp.data.SharedPreferencesManager
 import cosmin.dev.nokia5gmobileapp.navigation.Screen
 import cosmin.dev.nokia5gmobileapp.utils.CarAnimation
@@ -36,6 +44,8 @@ import cosmin.dev.nokia5gmobileapp.utils.CarAnimation
 fun ProfileScreen(navController: NavController) {
     // display car name, color, how many times you won etc
     // ! Make achievements for reaching a certain speed / winning a certain amount of times etc
+    var language by remember { mutableStateOf(SharedPreferencesManager.getString("language", "english")) }
+
     Column(
         modifier = Modifier.padding(16.dp),
     ) {
@@ -70,6 +80,46 @@ fun ProfileScreen(navController: NavController) {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.Center
+            ) {
+                Box(
+                    modifier = Modifier.padding(8.dp)
+                ) {
+                    Button(
+                        onClick = {
+                            SharedPreferencesManager.setString("language", "romanian")
+                        },
+                        modifier = Modifier.background(color = Color.Transparent),
+                        contentPadding = PaddingValues(0.dp)
+                    ) {
+                        Image(
+                            painter = painterResource(id = R.drawable.romanian),
+                            contentDescription = "Photo 1",
+                            modifier = Modifier.size(100.dp)
+                        )
+                    }
+                }
+
+                Box(
+                    modifier = Modifier.padding(8.dp)
+                ) {
+                    Button(
+                        onClick = {
+                            SharedPreferencesManager.setString("language", "english")
+                        },
+                        modifier = Modifier.background(color = Color.Transparent),
+                        contentPadding = PaddingValues(0.dp)
+                    ) {
+                        Image(
+                            painter = painterResource(id = R.drawable.english),
+                            contentDescription = "Photo 2",
+                            modifier = Modifier.size(100.dp)
+                        )
+                    }
+                }
+            }
             CarAnimation(color = SharedPreferencesManager.getString("car_color", "black"), size = 250.dp, isOpponent = false)
         }
     }

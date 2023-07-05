@@ -41,6 +41,7 @@ import cosmin.dev.nokia5gmobileapp.navigation.Screen
 @Composable
 fun SettingsScreen(navController: NavController) {
     var selectedButton by remember { mutableStateOf(SharedPreferencesManager.getString("opponent_speed", "4g")) }
+    var language by remember { mutableStateOf(SharedPreferencesManager.getString("language", "english")) }
 
     // make something to access the tutorial again
 
