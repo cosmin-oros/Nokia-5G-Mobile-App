@@ -135,8 +135,8 @@ fun SinglePlayerScreen(navController: NavController) {
                 if (carWithInternetPosition > carWithSetSpeedPosition) {
                     AlertDialog(
                         onDismissRequest = { dialogShown.value = false },
-                        title = { Text("Congratulations!") },
-                        text = { Text("You won!") },
+                        title = { Text(if (language == "english") "Congratulations!" else "Felicitari!") },
+                        text = { Text(if (language == "english") "You won!" else "Ai castigat!") },
                         confirmButton = {
                             Button(
                                 onClick = {
@@ -151,8 +151,8 @@ fun SinglePlayerScreen(navController: NavController) {
                 } else {
                     AlertDialog(
                         onDismissRequest = { dialogShown.value = false },
-                        title = { Text("Better luck next time!") },
-                        text = { Text("You lost!") },
+                        title = { Text(if (language == "english") "Better luck next time!" else "Mai mult noroc data viitoare!") },
+                        text = { Text(if (language == "english") "You lost!" else "Ai pierdut!") },
                         confirmButton = {
                             Button(
                                 onClick = {

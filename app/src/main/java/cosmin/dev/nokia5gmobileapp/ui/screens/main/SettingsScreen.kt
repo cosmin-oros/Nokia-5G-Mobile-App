@@ -1,6 +1,7 @@
 package cosmin.dev.nokia5gmobileapp.ui.screens.main
 
 import android.widget.ToggleButton
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -12,6 +13,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowBack
 import androidx.compose.material3.Button
@@ -31,9 +33,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import cosmin.dev.nokia5gmobileapp.R
 import cosmin.dev.nokia5gmobileapp.data.SharedPreferencesManager
 import cosmin.dev.nokia5gmobileapp.navigation.Screen
 
@@ -77,12 +81,53 @@ fun SettingsScreen(navController: NavController) {
 
         Spacer(modifier = Modifier.weight(1f))
 
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.Center
+        ) {
+            Box(
+                modifier = Modifier.padding(8.dp)
+            ) {
+                Button(
+                    onClick = {
+                        SharedPreferencesManager.setString("language", "romanian")
+                    },
+                    modifier = Modifier.background(color = Color.Transparent),
+                    contentPadding = PaddingValues(0.dp)
+                ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.romanian),
+                        contentDescription = "Photo 1",
+                        modifier = Modifier.size(100.dp)
+                    )
+                }
+            }
+
+            Box(
+                modifier = Modifier.padding(8.dp)
+            ) {
+                Button(
+                    onClick = {
+                        SharedPreferencesManager.setString("language", "english")
+                    },
+                    modifier = Modifier.background(color = Color.Transparent),
+                    contentPadding = PaddingValues(0.dp)
+                ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.english),
+                        contentDescription = "Photo 2",
+                        modifier = Modifier.size(100.dp)
+                    )
+                }
+            }
+        }
+
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier.fillMaxWidth()
         ) {
             Text(
-                text = "Opponent Network Speed",
+                text = if (language == "english") "Opponent Network Speed" else "Viteza rețelei adversarului",
                 style = MaterialTheme.typography.titleLarge,
                 modifier = Modifier.padding(bottom = 8.dp)
             )
@@ -154,7 +199,7 @@ fun SettingsScreen(navController: NavController) {
                     )
             ) {
                 Text(
-                    text = "Logout",
+                    text = if (language == "english") "Logout" else "Deconectare",
                     style = MaterialTheme.typography.titleMedium.copy(color = Color.White, fontSize = 18.sp),
                     modifier = Modifier.align(Alignment.Center)
                 )

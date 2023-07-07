@@ -190,7 +190,7 @@ fun MainScreen(navController: NavController) {
                         )
                 ) {
                     Text(
-                        text = "Festival Mode",
+                        text = if (language == "english") "Festival Mode" else "Mod Festival",
                         style = MaterialTheme.typography.titleMedium.copy(color = Color.White, fontSize = 18.sp),
                         modifier = Modifier.align(Alignment.Center)
                     )

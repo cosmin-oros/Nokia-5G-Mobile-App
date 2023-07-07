@@ -67,7 +67,7 @@ fun ProfileScreen(navController: NavController) {
                 contentAlignment = Alignment.CenterStart
             ) {
                 Text(
-                    text = "Profile",
+                    text = if (language == "english") "Profile" else "Profil",
                     style = MaterialTheme.typography.titleLarge,
                 )
             }
@@ -80,46 +80,6 @@ fun ProfileScreen(navController: NavController) {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.Center
-            ) {
-                Box(
-                    modifier = Modifier.padding(8.dp)
-                ) {
-                    Button(
-                        onClick = {
-                            SharedPreferencesManager.setString("language", "romanian")
-                        },
-                        modifier = Modifier.background(color = Color.Transparent),
-                        contentPadding = PaddingValues(0.dp)
-                    ) {
-                        Image(
-                            painter = painterResource(id = R.drawable.romanian),
-                            contentDescription = "Photo 1",
-                            modifier = Modifier.size(100.dp)
-                        )
-                    }
-                }
-
-                Box(
-                    modifier = Modifier.padding(8.dp)
-                ) {
-                    Button(
-                        onClick = {
-                            SharedPreferencesManager.setString("language", "english")
-                        },
-                        modifier = Modifier.background(color = Color.Transparent),
-                        contentPadding = PaddingValues(0.dp)
-                    ) {
-                        Image(
-                            painter = painterResource(id = R.drawable.english),
-                            contentDescription = "Photo 2",
-                            modifier = Modifier.size(100.dp)
-                        )
-                    }
-                }
-            }
             CarAnimation(color = SharedPreferencesManager.getString("car_color", "black"), size = 250.dp, isOpponent = false)
         }
     }

@@ -70,7 +70,7 @@ fun CongratulationsScreen(navController: NavController) {
             Spacer(modifier = Modifier.height(16.dp))
 
             Text(
-                text = "Congratulations!",
+                text = if (language == "english") "Congratulations!" else "Felicitari!",
                 style = MaterialTheme.typography.titleLarge,
                 modifier = Modifier.padding(bottom = 16.dp)
             )
@@ -78,7 +78,7 @@ fun CongratulationsScreen(navController: NavController) {
             Spacer(modifier = Modifier.height(16.dp))
 
             Text(
-                text = "Your car is ready!",
+                text = if (language == "english") "Your car is ready!" else "Masina ta este pregatita!",
                 style = MaterialTheme.typography.titleMedium,
                 modifier = Modifier.padding(bottom = 16.dp)
             )
@@ -117,7 +117,7 @@ fun CongratulationsScreen(navController: NavController) {
                     )
             ) {
                 Text(
-                    text = "Start Playing",
+                    text = if (language == "english") "Start Playing!" else "Începeți să jucați!",
                     style = MaterialTheme.typography.titleMedium.copy(color = Color.White, fontSize = 18.sp),
                     modifier = Modifier.align(Alignment.Center)
                 )

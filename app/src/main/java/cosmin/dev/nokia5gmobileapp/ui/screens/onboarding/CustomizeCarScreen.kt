@@ -82,7 +82,7 @@ fun CustomizeCarScreen(navController: NavController) {
             Spacer(modifier = Modifier.height(16.dp))
 
             Text(
-                text = "Please enter your car's info!",
+                text = if (language == "english") "Please enter your car's info!" else "Introduceti detaliile masinii!",
                 style = MaterialTheme.typography.titleMedium,
                 modifier = Modifier.padding(bottom = 16.dp)
             )
@@ -90,7 +90,7 @@ fun CustomizeCarScreen(navController: NavController) {
             Spacer(modifier = Modifier.height(32.dp))
 
             Text(
-                text = "Car Name:",
+                text = if (language == "english") "Car name:" else "Numele masinii:",
                 style = MaterialTheme.typography.bodyMedium,
                 modifier = Modifier.padding(bottom = 8.dp)
             )
@@ -101,7 +101,7 @@ fun CustomizeCarScreen(navController: NavController) {
                     name = it
                     nameError = false // Reset the last name error state when the input changes
                 },
-                label = { Text("Name") },
+                label = { Text(if (language == "english") "Name" else "Nume") },
                 modifier = Modifier.fillMaxWidth(),
                 isError = nameError, // Apply the error state to the TextField
                 colors = TextFieldDefaults.textFieldColors(
@@ -112,7 +112,7 @@ fun CustomizeCarScreen(navController: NavController) {
 
             if (nameError) {
                 Text(
-                    text = "Please enter a valid name",
+                    text = if (language == "english") "Please enter a valid name" else "Introduceti un nume valid",
                     color = Color.Red,
                     style = MaterialTheme.typography.labelSmall,
                     modifier = Modifier.padding(top = 4.dp)
@@ -121,7 +121,7 @@ fun CustomizeCarScreen(navController: NavController) {
 
             if (nameTooShortError) {
                 Text(
-                    text = "Please enter a longer name",
+                    text = if (language == "english") "Please enter a longer name" else "Introduceti un nume mai lung",
                     color = Color.Red,
                     style = MaterialTheme.typography.labelSmall,
                     modifier = Modifier.padding(top = 4.dp)
@@ -131,7 +131,7 @@ fun CustomizeCarScreen(navController: NavController) {
             Spacer(modifier = Modifier.height(32.dp))
 
             Text(
-                text = "Car Color:",
+                text = if (language == "english") "Car color:" else "Culoarea masinii:",
                 style = MaterialTheme.typography.bodyMedium,
                 modifier = Modifier.padding(bottom = 8.dp)
             )
