@@ -75,7 +75,7 @@ fun WelcomeScreen(navController: NavController) {
 
             Box(modifier = Modifier.padding(bottom = 32.dp)) {
                 Text(
-                    text = "Race against opponents using your internet speed and win rewards!",
+                    text = if (language == "english") "Race against opponents using your internet speed and win rewards!" else "Cursa împotriva adversarilor folosind viteza de internet și câștigați recompense!",
                     style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.SemiBold),
                     textAlign = TextAlign.Center, // Center align the text
                     modifier = Modifier.fillMaxWidth()
@@ -86,7 +86,7 @@ fun WelcomeScreen(navController: NavController) {
 
             Box(modifier = Modifier.padding(bottom = 32.dp)) {
                 Text(
-                    text = "Select a language to start with!",
+                    text = if (language == "english") "Select a language to start with!" else "Alege o limba cu care sa incepi!",
                     style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.SemiBold),
                     textAlign = TextAlign.Center, // Center align the text
                     modifier = Modifier.fillMaxWidth()
@@ -162,7 +162,7 @@ fun WelcomeScreen(navController: NavController) {
                     )
             ) {
                 Text(
-                    text = "Get Started",
+                    text = if (language == "english") "Get started" else "Incepe acum",
                     style = MaterialTheme.typography.titleMedium.copy(color = Color.White, fontSize = 18.sp),
                     modifier = Modifier.align(Alignment.Center)
                 )

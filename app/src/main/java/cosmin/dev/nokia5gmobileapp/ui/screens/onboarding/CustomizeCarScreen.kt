@@ -192,7 +192,7 @@ fun CustomizeCarScreen(navController: NavController) {
                     )
             ) {
                 Text(
-                    text = "Next",
+                    text = if (language == "english") "Next" else "Mai departe",
                     style = MaterialTheme.typography.titleMedium.copy(color = Color.White, fontSize = 18.sp),
                     modifier = Modifier.align(Alignment.Center)
                 )
