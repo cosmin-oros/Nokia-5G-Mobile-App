@@ -7,6 +7,7 @@ import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -15,6 +16,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
@@ -44,13 +46,11 @@ import kotlinx.coroutines.launch
 @Composable
 fun SinglePlayerScreen(navController: NavController) {
     var carWithInternetPosition by remember { mutableStateOf(0f) }
-    var carWithSetSpeedPosition by remember { mutableStateOf(0f) }
     var language by remember { mutableStateOf(SharedPreferencesManager.getString("language", "english")) }
 
     val maxDistance = 220f // Maximum distance to the right
 
     // Calculate the dynamic distance based on the carWithSetSpeedPosition
-    val dynamicDistance = (carWithSetSpeedPosition * 10).dp.coerceAtMost(maxDistance.dp)
     val dynamicDistanceYourCar = (carWithInternetPosition * 10).dp.coerceAtMost(maxDistance.dp)
 
     val connectivityManager = LocalContext.current.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
@@ -71,24 +71,6 @@ fun SinglePlayerScreen(navController: NavController) {
         }
     }
 
-    LaunchedEffect(Unit) {
-        while (true) {
-            // change these with better estimates
-            val averageDownloadSpeed4g = 20000f
-            val averageUploadSpeed4g = 4000f
-            val averageDownloadSpeed5g = 100000f
-            val averageUploadSpeed5g = 10000f
-
-            // change 0.3f to averageDown + averageUp / 10000000f !!!
-            carWithSetSpeedPosition += if (SharedPreferencesManager.getString("opponent_speed", "4g") == "4g") {
-                ((averageDownloadSpeed4g + averageUploadSpeed4g) / 10000000f)
-            } else {
-                ((averageDownloadSpeed5g + averageUploadSpeed5g) / 10000000f)
-            }
-            delay(10) // Delay to control the speed of the game loop
-        }
-    }
-
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -97,10 +79,14 @@ fun SinglePlayerScreen(navController: NavController) {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.End
     ) {
-        // !!! Make them move slowly but with the speeds set above until one of them reaches a certain point (left side of the screen
-        // make the cars smaller in size
-        // when they reach a certain point display a congratulations message
-        // change speed of opponent based on the shared preferences 4g/5g
+
+        Image(
+            painter = painterResource(id = R.drawable.logo),
+            contentDescription = "Logo",
+            modifier = Modifier.size(200.dp)
+        )
+
+        Spacer(modifier = Modifier.height(16.dp))
 
         Row(
             modifier = Modifier
@@ -108,21 +94,10 @@ fun SinglePlayerScreen(navController: NavController) {
                 .padding(end = dynamicDistanceYourCar),
             horizontalArrangement = Arrangement.End
         ) {
-            CarAnimation(color = SharedPreferencesManager.getString("car_color", "black"), size = 100.dp, isOpponent = false)
+            CarAnimation(color = SharedPreferencesManager.getString("car_color", "black"), size = 200.dp, isOpponent = false)
         }
 
-        Spacer(modifier = Modifier.height(32.dp))
-
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(end = dynamicDistance),
-            horizontalArrangement = Arrangement.End
-        ) {
-            CarAnimation(color = "black", size = 100.dp, isOpponent = true)
-        }
-
-        if (carWithInternetPosition >= 20f || carWithSetSpeedPosition >= 20f) {
+        if (carWithInternetPosition >= 20f) {
             val dialogShown = remember { mutableStateOf(false) }
             if (!dialogShown.value) {
                 LaunchedEffect(Unit) {
@@ -132,7 +107,8 @@ fun SinglePlayerScreen(navController: NavController) {
             }
 
             if (dialogShown.value) {
-                if (carWithInternetPosition > carWithSetSpeedPosition) {
+                // change condition !!! display km/h and a score/time at the end, change size etc
+                if (carWithInternetPosition > 1) {
                     AlertDialog(
                         onDismissRequest = { dialogShown.value = false },
                         title = { Text(if (language == "english") "Congratulations!" else "Felicitari!") },
