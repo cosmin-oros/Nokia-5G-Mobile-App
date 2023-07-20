@@ -49,7 +49,7 @@ fun SplashScreen(navController: NavController) {
         modifier = Modifier.fillMaxSize()
     ) {
         Image(
-            painter = painterResource(id = R.drawable.ic_launcher_foreground),
+            painter = painterResource(id = R.drawable.logo),
             contentDescription = "Logo",
             modifier = Modifier.scale(4 * scale.value)
         )

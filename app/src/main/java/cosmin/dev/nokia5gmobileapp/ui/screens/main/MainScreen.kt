@@ -94,7 +94,7 @@ fun MainScreen(navController: NavController) {
             // ! Change the logo image!!
 
             Image(
-                painter = painterResource(id = R.drawable.ic_launcher_foreground),
+                painter = painterResource(id = R.drawable.logo),
                 contentDescription = "Logo",
                 modifier = Modifier.size(200.dp)
             )

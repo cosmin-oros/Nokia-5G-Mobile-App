@@ -69,7 +69,7 @@ fun TutorialScreen(navController: NavController) {
             Spacer(modifier = Modifier.height(32.dp))
 
             Image(
-                painter = painterResource(id = R.drawable.ic_launcher_foreground),
+                painter = painterResource(id = R.drawable.logo),
                 contentDescription = "Logo",
                 modifier = Modifier.size(200.dp)
             )
@@ -137,7 +137,7 @@ fun TutorialScreen(navController: NavController) {
                     )
             ) {
                 Text(
-                    text = "Next",
+                    text = if (language == "english") "Next" else "Mai departe",
                     style = MaterialTheme.typography.titleMedium.copy(color = Color.White, fontSize = 18.sp),
                     modifier = Modifier.align(Alignment.Center)
                 )
