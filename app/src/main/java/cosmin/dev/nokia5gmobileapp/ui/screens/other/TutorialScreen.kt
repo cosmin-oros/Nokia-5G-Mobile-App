@@ -49,8 +49,9 @@ import cosmin.dev.nokia5gmobileapp.utils.ColorOption
 @Composable
 fun TutorialScreen(navController: NavController) {
     var counter by remember { mutableStateOf(0) }
-    var textValue by remember { mutableStateOf("You've successfully customized your car!") }
     var language by remember { mutableStateOf(SharedPreferencesManager.getString("language", "english")) }
+    var textValue by remember { mutableStateOf(if (language == "english") "You've successfully customized your car!"
+                                            else "V-ați personalizat cu succes mașina!") }
 
     Column(
         modifier = Modifier
@@ -92,15 +93,18 @@ fun TutorialScreen(navController: NavController) {
             onClick = {
                 when (counter) {
                     0 -> {
-                        textValue = "You're now ready to race against an opponent!"
+                        textValue = if (language == "english") "You're now ready to race against an opponent!"
+                                    else "Acum ești gata să concurezi împotriva unui adversar!"
                         counter++
                     }
                     1 -> {
-                        textValue = "Your speed will be determined by taking into account both your download and upload speeds!"
+                        textValue = if (language == "english") "Your speed will be determined by taking into account both your download and upload speeds!"
+                                    else "Viteza ta va fi determinată luând în considerare atât viteza de descărcare, cât și cea de încărcare!"
                         counter++
                     }
                     2 -> {
-                        textValue = "You can choose the opponent's speed in the settings tab!"
+                        textValue = if (language == "english") "You can choose the opponent's speed in the settings tab!"
+                                    else "Puteți alege viteza adversarului în fila de setări!"
                         counter++
                     }
                     else -> {

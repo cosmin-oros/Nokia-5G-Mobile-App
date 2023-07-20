@@ -73,7 +73,7 @@ fun SettingsScreen(navController: NavController) {
                 contentAlignment = Alignment.CenterStart
             ) {
                 Text(
-                    text = "Settings",
+                    text = if (language == "english") "Settings" else "Setari",
                     style = MaterialTheme.typography.titleLarge,
                 )
             }
