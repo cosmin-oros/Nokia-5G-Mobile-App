@@ -75,6 +75,8 @@ fun SinglePlayerScreen(navController: NavController) {
 
             carWithInternetPosition += (internetSpeed / 10000000f)
             speed = internetSpeed / 1000f
+            // remove this when you fix updating speed
+            speed += Random.nextFloat() * 20f - 10f
             // change score
             score = speed
 
