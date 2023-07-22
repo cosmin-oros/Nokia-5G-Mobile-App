@@ -51,7 +51,7 @@ import kotlin.random.Random
 fun SinglePlayerScreen(navController: NavController) {
     var carWithInternetPosition by remember { mutableStateOf(0f) }
     var language by remember { mutableStateOf(SharedPreferencesManager.getString("language", "english")) }
-    var score = 0f
+    var score by remember { mutableStateOf(0f) }
     var speed by remember { mutableStateOf(0f) }
     var internetSpeed by remember { mutableStateOf(0f) }
     var gear by remember { mutableStateOf(0) }
@@ -75,46 +75,48 @@ fun SinglePlayerScreen(navController: NavController) {
             when (gear) {
                 0 -> {
                     gear++
-                    delay(1000) // Delay to simulate the interval between measurements
+                    delay(100) // Delay to simulate the interval between measurements
                 }
                 1 -> {
-                    carWithInternetPosition += (internetSpeed / 50000000f)
-                    speed = internetSpeed / 5000f
+                    carWithInternetPosition += (internetSpeed * 3 / 50000000f)
+                    speed = internetSpeed * 3 / 5000f
                     gear++
-                    delay(500) // Delay to simulate the interval between measurements
+                    delay(50) // Delay to simulate the interval between measurements
                 }
                 2 -> {
-                    carWithInternetPosition += (internetSpeed / 40000000f)
-                    speed = internetSpeed / 4000f
+                    carWithInternetPosition += (internetSpeed * 3 / 40000000f)
+                    speed = internetSpeed * 3 / 4000f
                     gear++
-                    delay(500) // Delay to simulate the interval between measurements
+                    delay(50) // Delay to simulate the interval between measurements
                 }
                 3 -> {
-                    carWithInternetPosition += (internetSpeed / 30000000f)
-                    speed = internetSpeed / 3000f
+                    carWithInternetPosition += (internetSpeed * 3 / 30000000f)
+                    speed = internetSpeed * 3 / 3000f
                     gear++
-                    delay(500) // Delay to simulate the interval between measurements
+                    delay(50) // Delay to simulate the interval between measurements
                 }
                 4 -> {
-                    carWithInternetPosition += (internetSpeed / 20000000f)
-                    speed = internetSpeed / 2000f
+                    carWithInternetPosition += (internetSpeed * 3 / 20000000f)
+                    speed = internetSpeed * 3 / 2000f
                     gear++
-                    delay(500) // Delay to simulate the interval between measurements
+                    delay(50) // Delay to simulate the interval between measurements
                 }
                 5 -> {
-                    carWithInternetPosition += (internetSpeed / 15000000f)
-                    speed = internetSpeed / 1500f
+                    carWithInternetPosition += (internetSpeed * 3 / 15000000f)
+                    speed = internetSpeed * 3 / 1500f
                     gear++
-                    delay(500) // Delay to simulate the interval between measurements
+                    delay(50) // Delay to simulate the interval between measurements
                 }
                 else -> {
-                    carWithInternetPosition += (internetSpeed / 10000000f)
-                    speed = internetSpeed / 1000f
+                    carWithInternetPosition += (internetSpeed * 3 / 10000000f)
+                    speed = internetSpeed * 3 / 1000f
                     delay(10) // Delay to simulate the interval between measurements
                 }
             }
 
-            score = speed
+            if (carWithInternetPosition <= 21f) {
+                score = speed
+            }
 
         }
     }
