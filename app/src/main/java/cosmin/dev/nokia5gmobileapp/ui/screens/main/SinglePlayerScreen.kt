@@ -54,8 +54,7 @@ fun SinglePlayerScreen(navController: NavController) {
     var score = 0f
     var speed by remember { mutableStateOf(0f) }
     var internetSpeed by remember { mutableStateOf(0f) }
-    var downloadSpeed by remember { mutableStateOf(0) }
-    var uploadSpeed by remember { mutableStateOf(0) }
+    var gear by remember { mutableStateOf(0) }
 
     val maxDistance = 220f // Maximum distance to the right
 
@@ -63,24 +62,60 @@ fun SinglePlayerScreen(navController: NavController) {
     val dynamicDistanceYourCar = (carWithInternetPosition * 10).dp.coerceAtMost(maxDistance.dp)
 
     val connectivityManager = LocalContext.current.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-    val networkCapabilities = connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)
 
     LaunchedEffect(Unit) {
         while (true) {
+            val networkCapabilities = connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)
             // down - 94248 up - 9644
-            downloadSpeed = networkCapabilities?.linkDownstreamBandwidthKbps!!
-            uploadSpeed = networkCapabilities?.linkUpstreamBandwidthKbps!!
+            val downloadSpeed = networkCapabilities?.linkDownstreamBandwidthKbps!!
+            val uploadSpeed = networkCapabilities?.linkUpstreamBandwidthKbps!!
 
             internetSpeed = (uploadSpeed?.toFloat()?.let { downloadSpeed?.toFloat()?.plus(it) }) ?: 0f // upload speed + download speed
 
-            carWithInternetPosition += (internetSpeed / 10000000f)
-            speed = internetSpeed / 1000f
-            // remove this when you fix updating speed
-            speed += Random.nextFloat() * 20f - 10f
-            // change score
+            when (gear) {
+                0 -> {
+                    gear++
+                    delay(1000) // Delay to simulate the interval between measurements
+                }
+                1 -> {
+                    carWithInternetPosition += (internetSpeed / 50000000f)
+                    speed = internetSpeed / 5000f
+                    gear++
+                    delay(500) // Delay to simulate the interval between measurements
+                }
+                2 -> {
+                    carWithInternetPosition += (internetSpeed / 40000000f)
+                    speed = internetSpeed / 4000f
+                    gear++
+                    delay(500) // Delay to simulate the interval between measurements
+                }
+                3 -> {
+                    carWithInternetPosition += (internetSpeed / 30000000f)
+                    speed = internetSpeed / 3000f
+                    gear++
+                    delay(500) // Delay to simulate the interval between measurements
+                }
+                4 -> {
+                    carWithInternetPosition += (internetSpeed / 20000000f)
+                    speed = internetSpeed / 2000f
+                    gear++
+                    delay(500) // Delay to simulate the interval between measurements
+                }
+                5 -> {
+                    carWithInternetPosition += (internetSpeed / 15000000f)
+                    speed = internetSpeed / 1500f
+                    gear++
+                    delay(500) // Delay to simulate the interval between measurements
+                }
+                else -> {
+                    carWithInternetPosition += (internetSpeed / 10000000f)
+                    speed = internetSpeed / 1000f
+                    delay(10) // Delay to simulate the interval between measurements
+                }
+            }
+
             score = speed
 
-            delay(10) // Delay to simulate the interval between measurements
         }
     }
 
@@ -122,7 +157,7 @@ fun SinglePlayerScreen(navController: NavController) {
                 CarAnimation(color = SharedPreferencesManager.getString("car_color", "black"), size = 100.dp, isOpponent = false)
             }
 
-            if (carWithInternetPosition >= 20f) {
+            if (carWithInternetPosition >= 21f) {
                 val dialogShown = remember { mutableStateOf(false) }
                 if (!dialogShown.value) {
                     LaunchedEffect(Unit) {
@@ -132,7 +167,6 @@ fun SinglePlayerScreen(navController: NavController) {
                 }
 
                 if (dialogShown.value) {
-                    // change condition !!! display km/h and a score/time at the end, change size etc
                     AlertDialog(
                         onDismissRequest = { dialogShown.value = false },
                         title = { Text(if (language == "english") "Congratulations!" else "Felicitari!") },

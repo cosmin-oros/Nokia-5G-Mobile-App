@@ -29,7 +29,7 @@ fun SpeedDisplay(speed: Float) {
     val progress by animateFloatAsState(targetValue = speed / MAX_SPEED)
 
     Text(
-        text = "$speed km/h",
+        text = "${speed.toInt()} km/h",
         style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
     )
 
@@ -94,4 +94,4 @@ fun SpeedDisplay(speed: Float) {
     }
 }
 
-private const val MAX_SPEED = 400f
+private const val MAX_SPEED = 300f
