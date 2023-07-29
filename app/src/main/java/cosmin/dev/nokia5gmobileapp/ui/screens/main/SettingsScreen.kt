@@ -122,55 +122,6 @@ fun SettingsScreen(navController: NavController) {
             }
         }
 
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            Text(
-                text = if (language == "english") "Opponent Network Speed" else "Viteza rețelei adversarului",
-                style = MaterialTheme.typography.titleLarge,
-                modifier = Modifier.padding(bottom = 8.dp)
-            )
-
-            Spacer(modifier = Modifier.height(8.dp))
-
-            Row(
-                horizontalArrangement = Arrangement.Center,
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Column(horizontalAlignment = Alignment.CenterHorizontally,) {
-                    Text(
-                        text = "4G",
-                        style = MaterialTheme.typography.titleMedium,
-                    )
-                    RadioButton(
-                        selected = selectedButton == "4g",
-                        onClick = {
-                            selectedButton = "4g"
-                            SharedPreferencesManager.setString("opponent_speed", "4g")
-                        },
-                        modifier = Modifier.padding(end = 8.dp)
-                    )
-                }
-
-                Column(horizontalAlignment = Alignment.CenterHorizontally,) {
-                    Text(
-                        text = "5G",
-                        style = MaterialTheme.typography.titleMedium,
-                    )
-                    RadioButton(
-                        selected = selectedButton == "5g",
-                        onClick = {
-                            selectedButton = "5g"
-                            SharedPreferencesManager.setString("opponent_speed", "5g")
-                        },
-                        modifier = Modifier.padding(start = 8.dp)
-                    )
-                }
-            }
-        }
-
-
         Spacer(modifier = Modifier.weight(1f))
 
         Button(

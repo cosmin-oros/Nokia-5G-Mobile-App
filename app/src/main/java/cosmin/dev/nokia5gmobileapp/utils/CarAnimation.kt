@@ -46,17 +46,10 @@ fun CarAnimation(color: String, size: Dp, isOpponent: Boolean) {
         Column(
             modifier = Modifier.padding(bottom = 90.dp),
         ) {
-            if (!isOpponent) {
-                Text(
-                    text = SharedPreferencesManager.getString("name", "name"),
-                    style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
-                )
-            } else {
-                Text(
-                    text = "Opponent",
-                    style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
-                )
-            }
+            Text(
+                text = SharedPreferencesManager.getString("name", "name"),
+                style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
+            )
         }
     }
 
