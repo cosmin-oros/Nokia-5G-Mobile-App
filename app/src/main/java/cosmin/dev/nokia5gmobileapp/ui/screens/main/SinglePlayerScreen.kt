@@ -8,18 +8,9 @@ import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -49,7 +40,7 @@ import kotlin.random.Random
 @SuppressLint("UnrememberedMutableState", "CoroutineCreationDuringComposition")
 @Composable
 fun SinglePlayerScreen(navController: NavController) {
-    var carWithInternetPosition by remember { mutableStateOf(0f) }
+    var carPosition by remember { mutableStateOf(0f) }
     var language by remember { mutableStateOf(SharedPreferencesManager.getString("language", "english")) }
     var score by remember { mutableStateOf(0f) }
     var speed by remember { mutableStateOf(0f) }
@@ -58,19 +49,18 @@ fun SinglePlayerScreen(navController: NavController) {
 
     val maxDistance = 220f // Maximum distance to the right
 
-    // Calculate the dynamic distance based on the carWithSetSpeedPosition
-    val dynamicDistanceYourCar = (carWithInternetPosition * 10).dp.coerceAtMost(maxDistance.dp)
+    // Calculate the dynamic distance based on the carPosition
+    val dynamicDistanceYourCar = (carPosition * 10).dp.coerceAtMost(maxDistance.dp)
 
     val connectivityManager = LocalContext.current.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
     LaunchedEffect(Unit) {
         while (true) {
             val networkCapabilities = connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)
-            // down - 94248 up - 9644
-            val downloadSpeed = networkCapabilities?.linkDownstreamBandwidthKbps!!
-            val uploadSpeed = networkCapabilities?.linkUpstreamBandwidthKbps!!
+            val downloadSpeed = networkCapabilities?.linkDownstreamBandwidthKbps ?: 0
+            val uploadSpeed = networkCapabilities?.linkUpstreamBandwidthKbps ?: 0
 
-            internetSpeed = (uploadSpeed?.toFloat()?.let { downloadSpeed?.toFloat()?.plus(it) }) ?: 0f // upload speed + download speed
+            internetSpeed = (uploadSpeed.toFloat() + downloadSpeed.toFloat())
 
             when (gear) {
                 0 -> {
@@ -78,52 +68,33 @@ fun SinglePlayerScreen(navController: NavController) {
                     delay(100) // Delay to simulate the interval between measurements
                 }
                 1 -> {
-                    carWithInternetPosition += (internetSpeed * 3 / 50000000f)
+                    carPosition += (internetSpeed * 3 / 50000000f)
                     speed = internetSpeed * 3 / 5000f
                     gear++
                     delay(50) // Delay to simulate the interval between measurements
                 }
                 2 -> {
-                    carWithInternetPosition += (internetSpeed * 3 / 40000000f)
+                    carPosition += (internetSpeed * 3 / 40000000f)
                     speed = internetSpeed * 3 / 4000f
                     gear++
                     delay(50) // Delay to simulate the interval between measurements
                 }
-                3 -> {
-                    carWithInternetPosition += (internetSpeed * 3 / 30000000f)
-                    speed = internetSpeed * 3 / 3000f
-                    gear++
-                    delay(50) // Delay to simulate the interval between measurements
-                }
-                4 -> {
-                    carWithInternetPosition += (internetSpeed * 3 / 20000000f)
-                    speed = internetSpeed * 3 / 2000f
-                    gear++
-                    delay(50) // Delay to simulate the interval between measurements
-                }
-                5 -> {
-                    carWithInternetPosition += (internetSpeed * 3 / 15000000f)
-                    speed = internetSpeed * 3 / 1500f
-                    gear++
-                    delay(50) // Delay to simulate the interval between measurements
-                }
+                // Add more cases for gear 3, 4, 5, etc.
                 else -> {
-                    carWithInternetPosition += (internetSpeed * 3 / 10000000f)
+                    carPosition += (internetSpeed * 3 / 10000000f)
                     speed = internetSpeed * 3 / 1000f
                     delay(10) // Delay to simulate the interval between measurements
                 }
             }
 
-            if (carWithInternetPosition <= 21f) {
+            if (carPosition <= 21f) {
                 score = speed
             }
-
         }
     }
 
     Column(
-        modifier = Modifier
-            .fillMaxSize(),
+        modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -159,7 +130,7 @@ fun SinglePlayerScreen(navController: NavController) {
                 CarAnimation(color = SharedPreferencesManager.getString("car_color", "black"), size = 100.dp, isOpponent = false)
             }
 
-            if (carWithInternetPosition >= 21f) {
+            if (carPosition >= 21f) {
                 val dialogShown = remember { mutableStateOf(false) }
                 if (!dialogShown.value) {
                     LaunchedEffect(Unit) {
@@ -188,5 +159,4 @@ fun SinglePlayerScreen(navController: NavController) {
             }
         }
     }
-
 }
